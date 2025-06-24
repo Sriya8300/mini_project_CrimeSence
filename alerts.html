@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alerts</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin: 5px 0; color: #d00; }
+        a { margin-top: 10px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <h1>Alerts</h1>
+    <ul>
+    {% for alert in alerts %}
+        <li>{{ alert }}</li>
+    {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Back to Dashboard</a>
+</body>
+</html>
