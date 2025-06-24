@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CrimeSense Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        video { width: 640px; height: 360px; }
+        .summary, .links { margin-top: 20px; }
+        .links a { margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <h1>CrimeSense Dashboard</h1>
+    <h2>Processed Video</h2>
+    <video controls>
+        <source src="{{ url_for('video') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="summary">
+        <h2>Summary</h2>
+        {% for video_name, summary in summaries.items() %}
+        <p><strong>Video Name:</strong> {{ video_name }}</p>
+        <p><strong>Total Frames Processed:</strong> {{ summary.total_frames }}</p>
+        <p><strong>Objects Detected:</strong></p>
+        <ul>
+        {% for obj, count in summary.detections.items() %}
+            {% if count > 0 %}
+            <li>{{ obj.capitalize() }}: {{ count }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
+
+    <div class="links">
+        <a href="{{ url_for('alerts') }}">View Alerts</a>
+        <a href="{{ url_for('heatmap') }}">View Crime Hotspot Heatmap</a>
+    </div>
+</body>
+</html>
